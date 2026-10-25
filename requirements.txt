@@ -1,0 +1,14 @@
+pandas
+numpy
+scikit-learn
+joblib
+matplotlib
+seaborn
+jupyter
+fastapi
+uvicorn[standard]
+python-jose[cryptography]
+passlib[bcrypt]
+python-dotenv
+pytest
+httpx
