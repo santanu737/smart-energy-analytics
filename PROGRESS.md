@@ -1,10 +1,12 @@
 # Progress
 ## Done
-- Project structure, requirements.txt, .gitignore, .env.example, src/config.py
+- Project structure, requirements.txt, .gitignore, .env.example, src/config.py (household version)
+- README switched to the campus version (BDG2 dataset)
 ## Current phase
-Phase 1: data ingestion and cleaning (src/data_loader.py)
+Phase 0: update config/requirements for BDG2, inspect data files
 ## Next
-Phase 1 tests, then Phase 2: EDA notebook
+Phase 1: data loading and campus selection
 ## Notes
 - Always read README.md before coding.
+- Never assume column names: print headers first.
 - Run and test after each phase.
