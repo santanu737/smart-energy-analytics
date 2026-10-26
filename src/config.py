@@ -25,7 +25,7 @@ BUILDINGS_META_CSV = PROCESSED_DIR / "buildings_meta.csv"
 
 # Global settings
 RANDOM_STATE = 42
-CAMPUS_SITE_ID = None  # To be chosen in Phase 1
+CAMPUS_SITE_ID = "Fox"  # Chosen from site_completeness(): 137 elec buildings, 98.3% mean completeness, 95.6% of buildings >= 90% complete, 63.5% Education/Office.
 
 # Financial and Environmental factors (illustrative defaults)
 TARIFF_PER_KWH = 8  # Local currency units per kWh
