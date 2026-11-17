@@ -94,10 +94,12 @@ class DataService:
         print("Loaded:", {k: v for k, v in self.loaded.items()})
 
     def _load_weather(self):
-        if not config.WEATHER_CSV.exists():
+        weather_path = (config.API_WEATHER_CSV
+                        if config.API_WEATHER_CSV.exists() else config.WEATHER_CSV)
+        if not weather_path.exists():
             return None
         keep = set(WEATHER_COLS) | {"timestamp", "site_id"}
-        w = pd.read_csv(config.WEATHER_CSV, usecols=lambda c: c in keep)
+        w = pd.read_csv(weather_path, usecols=lambda c: c in keep)
         w = w[w["site_id"] == config.CAMPUS_SITE_ID].drop(columns="site_id")
         w["timestamp"] = pd.to_datetime(w["timestamp"])
         return w.sort_values("timestamp").reset_index(drop=True)

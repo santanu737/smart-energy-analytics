@@ -22,10 +22,17 @@ data/raw/*
 !data/raw/.gitkeep
 data/processed/*
 !data/processed/.gitkeep
+!data/processed/campus_long.parquet
+!data/processed/campus_total.parquet
+!data/processed/buildings_meta.csv
+!data/processed/anomalies.parquet
+!data/processed/weather_fox.csv
 
 # Models (keep .gitkeep)
 models/*.joblib
 !models/.gitkeep
+!models/forecast_model.joblib
+!models/isolation_forest.joblib
 
 # System / OS / IDE
 .DS_Store

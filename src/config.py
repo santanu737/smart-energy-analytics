@@ -15,6 +15,7 @@ DOCS_DIR = PROJECT_ROOT / "docs"
 # Raw file paths (verified names in Phase 0)
 METADATA_CSV = RAW_DIR / "metadata.csv"
 WEATHER_CSV = RAW_DIR / "weather.csv"
+API_WEATHER_CSV = PROCESSED_DIR / "weather_fox.csv"
 ELECTRICITY_CSV = RAW_DIR / "electricity.csv"
 ELECTRICITY_CLEANED_CSV = RAW_DIR / "electricity_cleaned.csv"
 
