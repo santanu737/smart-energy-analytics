@@ -1,0 +1,49 @@
+{
+  "train_end": "2017-03-31 23:00:00",
+  "contamination": 0.005,
+  "threshold": 0.6695279101240947,
+  "validation": {
+    "eval_rows": 860805,
+    "isolation_forest": {
+      "precision": 0.1757,
+      "recall": 0.5983,
+      "f1": 0.2716,
+      "flagged": 12641,
+      "true_faults": 3712,
+      "average_precision": 0.3623
+    },
+    "zscore_rule": {
+      "precision": 0.6206,
+      "recall": 0.6309,
+      "f1": 0.6257,
+      "flagged": 3774,
+      "true_faults": 3712,
+      "average_precision": 0.6132
+    },
+    "recall_by_fault_type": {
+      "spike": {
+        "isolation_forest": 0.9241,
+        "zscore_rule": 0.8776,
+        "count": 1291
+      },
+      "drop": {
+        "isolation_forest": 0.0988,
+        "zscore_rule": 0.407,
+        "count": 860
+      },
+      "stretch": {
+        "isolation_forest": 0.6041,
+        "zscore_rule": 0.5503,
+        "count": 1561
+      }
+    }
+  },
+  "rules": {
+    "zero_readings": 6593,
+    "flat_run_hours": 16829,
+    "min_flat_hours": 24
+  },
+  "ml_flagged_rows": 17525,
+  "ml_valid_rows": 2266646,
+  "events_total": 40947
+}

@@ -1,0 +1,134 @@
+{
+  "1": {
+    "rows": {
+      "train": 10725,
+      "val": 2179,
+      "test": 4391
+    },
+    "persistence": {
+      "mae": 417.4,
+      "rmse": 787.8,
+      "r2": 0.8728,
+      "mape_%": 2.22
+    },
+    "naive_24": {
+      "mae": 866.1,
+      "rmse": 1455.2,
+      "r2": 0.5661,
+      "mape_%": 4.46
+    },
+    "naive_168": {
+      "mae": 664.6,
+      "rmse": 1156.1,
+      "r2": 0.7261,
+      "mape_%": 3.52
+    },
+    "hgb_with_weather": {
+      "mae": 208.4,
+      "rmse": 533.7,
+      "r2": 0.9416,
+      "mape_%": 1.21
+    },
+    "hgb_no_weather": {
+      "mae": 207.9,
+      "rmse": 531.7,
+      "r2": 0.9421,
+      "mape_%": 1.2
+    },
+    "best_params": {
+      "learning_rate": 0.05,
+      "max_iter": 300,
+      "max_leaf_nodes": 31
+    },
+    "val_mae_with_weather": 191.5,
+    "val_mae_no_weather": 184.6
+  },
+  "6": {
+    "rows": {
+      "train": 10720,
+      "val": 2179,
+      "test": 4389
+    },
+    "persistence": {
+      "mae": 1860.7,
+      "rmse": 2290.5,
+      "r2": -0.0735,
+      "mape_%": 9.31
+    },
+    "naive_24": {
+      "mae": 866.9,
+      "rmse": 1456.5,
+      "r2": 0.5659,
+      "mape_%": 4.46
+    },
+    "naive_168": {
+      "mae": 664.7,
+      "rmse": 1157.5,
+      "r2": 0.7259,
+      "mape_%": 3.52
+    },
+    "hgb_with_weather": {
+      "mae": 386.1,
+      "rmse": 684.1,
+      "r2": 0.9042,
+      "mape_%": 2.11
+    },
+    "hgb_no_weather": {
+      "mae": 392.0,
+      "rmse": 693.6,
+      "r2": 0.9016,
+      "mape_%": 2.14
+    },
+    "best_params": {
+      "learning_rate": 0.05,
+      "max_iter": 600,
+      "max_leaf_nodes": 15
+    },
+    "val_mae_with_weather": 366.9,
+    "val_mae_no_weather": 361.4
+  },
+  "24": {
+    "rows": {
+      "train": 10705,
+      "val": 2180,
+      "test": 4392
+    },
+    "persistence": {
+      "mae": 866.7,
+      "rmse": 1456.1,
+      "r2": 0.566,
+      "mape_%": 4.46
+    },
+    "naive_24": {
+      "mae": 866.7,
+      "rmse": 1456.1,
+      "r2": 0.566,
+      "mape_%": 4.46
+    },
+    "naive_168": {
+      "mae": 665.5,
+      "rmse": 1158.1,
+      "r2": 0.7255,
+      "mape_%": 3.53
+    },
+    "hgb_with_weather": {
+      "mae": 411.6,
+      "rmse": 751.8,
+      "r2": 0.8843,
+      "mape_%": 2.25
+    },
+    "hgb_no_weather": {
+      "mae": 446.8,
+      "rmse": 776.7,
+      "r2": 0.8765,
+      "mape_%": 2.4
+    },
+    "best_params": {
+      "learning_rate": 0.05,
+      "max_iter": 300,
+      "max_leaf_nodes": 15
+    },
+    "val_mae_with_weather": 379.8,
+    "val_mae_no_weather": 371.7
+  }
+}

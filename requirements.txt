@@ -5,11 +5,11 @@ joblib
 pyarrow
 matplotlib
 seaborn
-jupyter
+ipykernel
+nbconvert
 fastapi
-uvicorn[standard]
-python-jose[cryptography]
-passlib[bcrypt]
+uvicorn
+pyjwt
 python-dotenv
 pytest
 httpx

@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Energy Analytics Dashboard</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <aside class="sidebar">
+        <div class="sidebar-brand">
+            <h1>Campus Energy</h1>
+            <p>Analytics & Forecasting</p>
+        </div>
+        <ul class="sidebar-menu">
+            <li class="active" data-target="overview" role="button" tabindex="0">Overview</li>
+            <li data-target="forecast" role="button" tabindex="0">Forecasting</li>
+            <li data-target="buildings" role="button" tabindex="0">Buildings</li>
+            <li data-target="anomalies" role="button" tabindex="0">Anomalies</li>
+        </ul>
+        <div class="sidebar-footer">
+            <button id="logout-btn" class="btn-primary" style="background: #dc2626;">Logout</button>
+        </div>
+    </aside>
+
+    <div class="main-content">
+        <header>
+            <h2 id="page-title">Campus Overview</h2>
+            <div class="header-controls">
+                <button id="theme-toggle" class="btn-primary" style="width: auto; padding: 0.5rem 1rem;">Toggle Theme</button>
+            </div>
+        </header>
+
+        <div class="dashboard-container dashboard-section" id="overview">
+            <!-- KPI Cards -->
+            <div class="kpi-grid">
+                <div class="kpi-card">
+                    <h3>Total Energy</h3>
+                    <div class="value" id="kpi-total-energy">-- kWh</div>
+                </div>
+                <div class="kpi-card">
+                    <h3>Average Load</h3>
+                    <div class="value" id="kpi-avg-load">-- kW</div>
+                </div>
+                <div class="kpi-card">
+                    <h3>Peak Load</h3>
+                    <div class="value" id="kpi-peak-load">-- kW</div>
+                </div>
+                <div class="kpi-card">
+                    <h3>Anomalies Flagged</h3>
+                    <div class="value" id="kpi-anomalies">--</div>
+                </div>
+                <div class="kpi-card">
+                    <h3>Estimated Cost</h3>
+                    <div class="value" id="kpi-cost">--</div>
+                </div>
+            </div>
+
+            <div class="dashboard-container dashboard-section" id="forecast" hidden>
+                <div class="chart-card">
+                    <div class="section-heading">
+                        <h3>24-hour campus forecast</h3>
+                        <button id="refresh-forecast" class="btn-primary compact-button">Refresh</button>
+                    </div>
+                    <div class="table-scroll">
+                        <table id="forecast-table">
+                            <thead><tr><th>Target time</th><th>Forecast (kWh)</th><th>Actual (kWh)</th></tr></thead>
+                            <tbody><tr><td colspan="3">Select Forecasting to load data.</td></tr></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="dashboard-container dashboard-section" id="buildings" hidden>
+                <div class="chart-card">
+                    <h3>Building performance</h3>
+                    <div class="table-scroll">
+                        <table id="buildings-table">
+                            <thead><tr><th>Building</th><th>Usage type</th><th>Total kWh</th><th>EUI</th><th>Baseload</th></tr></thead>
+                            <tbody><tr><td colspan="5">Select Buildings to load data.</td></tr></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="dashboard-container dashboard-section" id="anomalies" hidden>
+                <div class="chart-card">
+                    <h3>Flagged readings</h3>
+                    <div class="table-scroll">
+                        <table id="all-anomalies-table">
+                            <thead><tr><th>Building</th><th>Timestamp</th><th>kWh</th><th>Score</th><th>Source</th></tr></thead>
+                            <tbody><tr><td colspan="5">Select Anomalies to load data.</td></tr></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Charts Section -->
+            <div class="charts-grid">
+                <div class="chart-card">
+                    <h3>Campus Load History</h3>
+                    <div class="chart-container">
+                        <canvas id="campusChart"></canvas>
+                    </div>
+                </div>
+                <div class="chart-card">
+                    <h3>Usage by Space Type</h3>
+                    <div class="chart-container">
+                        <canvas id="usageDoughnut"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tables Section -->
+            <div class="panel-grid">
+                <div class="chart-card">
+                    <h3>Top Buildings by EUI</h3>
+                    <div style="overflow-x: auto;">
+                        <table id="ranking-table">
+                            <thead>
+                                <tr>
+                                    <th>Building ID</th>
+                                    <th>Usage</th>
+                                    <th>EUI (kWh/m²)</th>
+                                    <th>Baseload Ratio</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="chart-card">
+                    <h3>Recent Anomalies</h3>
+                    <div style="overflow-x: auto;">
+                        <table id="anomaly-table">
+                            <thead>
+                                <tr>
+                                    <th>Building</th>
+                                    <th>Timestamp</th>
+                                    <th>kWh</th>
+                                    <th>Score</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/js/api.js?v=2"></script>
+    <script src="/js/charts.js?v=2"></script>
+    <script src="/js/app.js?v=2"></script>
+</body>
+</html>
