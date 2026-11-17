@@ -11,12 +11,17 @@
 - Phase 8: FastAPI backend (`backend/`) with auth, endpoints, data service
 - Phase 9: Frontend dashboard (`frontend/`) with login, charts, heatmap, anomaly panel, live replay
 - Phase 10: Test suite (`tests/`) - all 24 tests passed successfully (`pytest -q`)
+- Phase 11: Results documentation, evaluation plot, dashboard screenshots, and README acceptance checklist completed
 ## Current phase
-All phases (0-10) completed successfully.
+All phases (0-11) completed successfully.
 ## Next
-Documentation and results finalization (Phase 11).
+No planned phase remains.
 ## Notes
 - All models retrained and verified in the current environment.
 - Pytest passing successfully (24 tests passed).
 - Frontend API client syntax and dashboard navigation fixed; forecast, building, and anomaly panels are wired to the backend.
 - Dashboard navigation now scrolls the selected section into view.
+- README results now contain the saved forecast and anomaly metrics.
+- Six documentation images are available under `docs/images/`.
+- Frontend ranking and anomaly rendering handles missing numeric values and uses the API's `score` field without failing the dashboard.
+- Dashboard navigation no longer hides nested Forecasting, Buildings, or Anomalies sections; the login form no longer shows a misleading hard-coded password.

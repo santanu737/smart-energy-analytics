@@ -21,7 +21,8 @@ document.addEventListener('DOMContentLoaded', async () => {
         localStorage.setItem('theme', theme);
     });
 
-    const sections = [...document.querySelectorAll('.dashboard-section')];
+    const sections = ['forecast', 'buildings', 'anomalies']
+        .map(id => document.getElementById(id));
     const navItems = [...document.querySelectorAll('.sidebar-menu li')];
     const titles = {
         overview: 'Campus Overview',
@@ -35,7 +36,9 @@ document.addEventListener('DOMContentLoaded', async () => {
         sections.forEach(section => { section.hidden = section.id !== target; });
         const selectedSection = document.getElementById(target);
         document.getElementById('page-title').textContent = titles[target];
-        selectedSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        if (target !== 'overview') {
+            selectedSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
         if (target === 'forecast') await loadForecast();
         if (target === 'buildings') await loadBuildings();
         if (target === 'anomalies') await loadAllAnomalies();
@@ -95,7 +98,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                     <td>${anomaly.building_id}</td>
                     <td>${anomaly.timestamp}</td>
                     <td>${Number(anomaly.kwh).toFixed(1)}</td>
-                    <td>${Number(anomaly.anomaly_score).toFixed(2)}</td>
+                    <td>${anomaly.score == null ? '--' : Number(anomaly.score).toFixed(2)}</td>
                     <td>${anomaly.source || '--'}</td>
                 </tr>`).join('');
         } catch (error) {
@@ -130,9 +133,9 @@ document.addEventListener('DOMContentLoaded', async () => {
         rankingBody.innerHTML = ranking.map(r => `
             <tr>
                 <td>${r.building_id}</td>
-                <td>${r.primaryspaceusage}</td>
-                <td>${r.eui_annual.toFixed(1)}</td>
-                <td>${r.baseload_ratio.toFixed(2)}</td>
+                <td>${r.primaryspaceusage || '--'}</td>
+                <td>${r.eui_annual == null ? '--' : Number(r.eui_annual).toFixed(1)}</td>
+                <td>${r.baseload_ratio == null ? '--' : Number(r.baseload_ratio).toFixed(2)}</td>
             </tr>
         `).join('');
 
@@ -143,8 +146,8 @@ document.addEventListener('DOMContentLoaded', async () => {
             <tr class="anomaly-row">
                 <td>${a.building_id}</td>
                 <td>${a.timestamp}</td>
-                <td>${a.kwh.toFixed(1)}</td>
-                <td>${a.anomaly_score.toFixed(2)}</td>
+                <td>${a.kwh == null ? '--' : Number(a.kwh).toFixed(1)}</td>
+                <td>${a.score == null ? '--' : Number(a.score).toFixed(2)}</td>
             </tr>
         `).join('');
 

@@ -357,18 +357,31 @@ ACCESS_TOKEN_EXPIRE_MINUTES=60
 
 ---
 
-## 9. Results (fill after training)
+## 9. Results
 
 | Task | Model | Metric | Value |
 |---|---|---|---|
-| Campus forecast (1h ahead) | Naive (lag 24) | MAE / RMSE | TBD |
-| Campus forecast (1h ahead) | Seasonal naive (lag 168) | MAE / RMSE | TBD |
-| Campus forecast (1h ahead) | Gradient Boosting with weather | MAE / RMSE / R2 | TBD |
-| Campus forecast (1h ahead) | Gradient Boosting without weather | MAE / RMSE | TBD |
-| Anomaly detection | Isolation Forest (injected faults) | Precision / Recall | TBD |
-| Anomaly detection | Rolling z-score rule | Precision / Recall | TBD |
+| Campus forecast (1h ahead) | Naive (lag 24) | MAE / RMSE | 866.1 / 1455.2 |
+| Campus forecast (1h ahead) | Seasonal naive (lag 168) | MAE / RMSE | 664.6 / 1156.1 |
+| Campus forecast (1h ahead) | HistGradientBoosting with weather | MAE / RMSE / R2 | 208.4 / 533.7 / 0.9416 |
+| Campus forecast (1h ahead) | HistGradientBoosting without weather | MAE / RMSE | 207.9 / 531.7 |
+| Anomaly detection | Isolation Forest (injected faults) | Precision / Recall | 0.1757 / 0.5983 |
+| Anomaly detection | Rolling z-score rule | Precision / Recall | 0.6206 / 0.6309 |
 
-Screenshots: add images from `docs/images/` here.
+The trained forecasting model also achieved MAE/RMSE/R2 of **386.1 / 684.1 / 0.9042**
+for 6 hours ahead and **411.6 / 751.8 / 0.8843** for 24 hours ahead. Weather
+was retained for the production feature set even though the no-weather comparison
+was marginally better at the 1-hour horizon; at 6 and 24 hours, weather improved
+the test MAE and RMSE.
+
+Screenshots and evaluation plots:
+
+- [Forecast versus actual](docs/images/forecast_vs_actual.png)
+- [Forecast error by hour](docs/images/forecast_error_by_hour.png)
+- [Forecast feature importance](docs/images/forecast_feature_importance.png)
+- [Anomaly validation](docs/images/anomaly_validation.png)
+- [Dashboard overview](docs/images/dashboard_overview.png)
+- [Dashboard anomalies](docs/images/dashboard_anomalies.png)
 
 ---
 
@@ -408,18 +421,18 @@ After every phase: run it, fix errors, update `PROGRESS.md`, commit, push.
 
 ## 13. Acceptance checklist
 
-- [ ] `docs/DATA_NOTES.md` exists and matches the real files
-- [ ] `python -m src.data_loader` builds the campus dataset without errors
-- [ ] `python -m src.train` saves models and metrics
-- [ ] Forecast model beats both naive baselines on the test period
-- [ ] Anomaly detector is validated with injected faults
-- [ ] Building ranking and baseload analysis work
-- [ ] `uvicorn backend.main:app --reload` serves API and dashboard together
-- [ ] Login works and protected endpoints reject missing tokens
-- [ ] Dashboard shows KPIs, campus chart, forecast, building view, heatmap, ranking, anomalies, and live replay
-- [ ] Dashboard works on mobile width and in dark mode
-- [ ] `pytest -q` passes
-- [ ] README results and screenshots are filled in
+- [x] `docs/DATA_NOTES.md` exists and matches the real files
+- [x] `python -m src.data_loader` builds the campus dataset without errors
+- [x] `python -m src.train` saves models and metrics
+- [x] Forecast model beats both naive baselines on the test period
+- [x] Anomaly detector is validated with injected faults
+- [x] Building ranking and baseload analysis work
+- [x] `uvicorn backend.main:app --reload` serves API and dashboard together
+- [x] Login works and protected endpoints reject missing tokens
+- [x] Dashboard shows KPIs, campus chart, forecast, building view, heatmap, ranking, anomalies, and live replay
+- [x] Dashboard works on mobile width and in dark mode
+- [x] `pytest -q` passes
+- [x] README results and screenshots are filled in
 
 ---
 
