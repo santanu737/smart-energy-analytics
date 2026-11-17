@@ -65,8 +65,10 @@ class DataService:
         long = pd.read_parquet(config.CAMPUS_LONG_PARQUET, columns=["timestamp", "building_id", "kwh"])
         long["timestamp"] = pd.to_datetime(long["timestamp"])
         self.long_df = long
-        self.by_building = {str(k): g.reset_index(drop=True)
-                            for k, g in long.groupby("building_id", observed=True)}
+        self.by_building = {
+            str(k): indexes.to_numpy()
+            for k, indexes in long.groupby("building_id", observed=True).groups.items()
+        }
         self.meta = pd.read_csv(config.BUILDINGS_META_CSV)
         self.meta["building_id"] = self.meta["building_id"].astype(str)
         self.loaded.update(campus_total=True, campus_long=True, buildings_meta=True)
@@ -107,7 +109,17 @@ class DataService:
     def _load_forecast(self):
         from src import forecast as fc
         self.bundle = joblib.load(FORECAST_MODEL)
-        total, weather = fc.load_inputs()
+        total = self.campus_total
+        weather = self.weather
+        required_flags = {
+            feature for features in self.bundle["features"].values()
+            for feature in features
+            if feature.endswith("_gap_flag")
+        }
+        weather = weather.copy()
+        for flag in required_flags:
+            if flag not in weather:
+                weather[flag] = 0.0
         self.fc_tables = {h: fc.make_table(total, weather, h) for h in self.bundle["models"]}
 
     def _building_stats(self) -> pd.DataFrame:
@@ -141,6 +153,9 @@ class DataService:
     def has_building(self, building_id: str) -> bool:
         return building_id in self.by_building
 
+    def _building_frame(self, building_id: str) -> pd.DataFrame:
+        return self.long_df.iloc[self.by_building[building_id]]
+
     # --------------------------------------------------------- endpoints
     def get_summary(self, start=None, end=None) -> dict:
         df = self._slice(self.campus_total, start, end)
@@ -167,14 +182,14 @@ class DataService:
         return to_records(df)
 
     def get_building_history(self, building_id, start=None, end=None, resolution="hourly") -> list[dict]:
-        df = self._slice(self.by_building[building_id], start, end)
+        df = self._slice(self._building_frame(building_id), start, end)
         if resolution == "daily":
             d = df.set_index("timestamp")["kwh"].resample("D").mean() * 24
             df = d.rename("kwh").reset_index()
         return to_records(df[["timestamp", "kwh"]])
 
     def get_building_profile(self, building_id) -> dict:
-        df = self.by_building[building_id]
+        df = self._building_frame(building_id)
         p = (df.assign(dow=df["timestamp"].dt.day_of_week, hour=df["timestamp"].dt.hour)
              .pivot_table(index="dow", columns="hour", values="kwh", aggfunc="mean")
              .reindex(index=range(7), columns=range(24)))
