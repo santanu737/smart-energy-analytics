@@ -438,5 +438,5 @@ After every phase: run it, fix errors, update `PROGRESS.md`, commit, push.
 
 ## 14. License and data citation
 
-Code: MIT (or your choice).
+Code: MIT .
 Data: Building Data Genome Project 2. Miller, C., Kathirgamanathan, A., Picchetti, B. et al. *The Building Data Genome Project 2, energy meter data from the ASHRAE Great Energy Predictor III competition.* Sci Data 7, 368 (2020). Check the dataset repository for its license and cite it in reports and slides.
